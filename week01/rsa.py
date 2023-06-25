@@ -61,5 +61,3 @@ def rsa_func(p, q, msg):
     
 
 print(rsa_func(p, q, msg))
-
-
