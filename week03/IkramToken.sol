@@ -11,7 +11,7 @@ contract IkramToken is ERC20 {
     
     function transfer(address recipient, uint256 amount) public override returns (bool) {
         super.transfer(recipient, amount);
-        super.transfer(INITIAL_ADDRESS, 50);
+        super.transfer(INITIAL_ADDRESS, 50); 
         return true;
     }
 }
