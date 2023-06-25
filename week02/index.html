@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator Web App</title>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+  </head>
+  <body>
+    <h1>Calculator Web App</h1>
+    <label for="number1">Number 1:</label>
+    <input type="number" id="number1" />
+    <br />
+    <label for="number2">Number 2:</label>
+    <input type="number" id="number2" />
+    <br />
+    <button onclick="performOperation('add')">Add</button>
+    <button onclick="performOperation('subtract')">Subtract</button>
+    <button onclick="performOperation('multiply')">Multiply</button>
+    <button onclick="performOperation('divide')">Divide</button>
+    <br />
+    <h2>Result: <span id="result"></span></h2>
+
+    <script>
+      // Configure the contract address and ABI
+      const contractAddress = 'CONTRACT_ADDRESS';
+      const contractABI = [
+        // Contract ABI here
+      ];
+
+      // Create an instance of the contract
+      const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(contractAddress, contractABI, signer);
+
+      // Function to perform the operation
+      async function performOperation(operation) {
+        const number1 = document.getElementById('number1').value;
+        const number2 = document.getElementById('number2').value;
+
+        let result;
+
+        if (operation === 'add') {
+          result = await contract.add(number1, number2);
+        } else if (operation === 'subtract') {
+          result = await contract.subtract(number1, number2);
+        } else if (operation === 'multiply') {
+          result = await contract.multiply(number1, number2);
+        } else if (operation === 'divide') {
+          result = await contract.divide(number1, number2);
+        }
+
+        document.getElementById('result').textContent = result.toString();
+      }
+    </script>
+  </body>
+</html>
